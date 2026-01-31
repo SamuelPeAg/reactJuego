@@ -11,7 +11,6 @@ function Games() {
 
     const observerTarget = useRef(null);
 
-    // Initial load and search
     const fetchGames = async (query = '', pageNum = 1, shouldReplace = false) => {
         if (loading) return;
         setLoading(true);
@@ -27,17 +26,14 @@ function Games() {
         }
     };
 
-    // Search handler
     useEffect(() => {
-        // Reset state when search changes
         setPage(1);
         setHasMore(true);
-        setGames([]); // Clear current games
+        setGames([]);
         fetchGames(search, 1, true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
-    // Infinite Scroll Observer
     useEffect(() => {
         const observer = new IntersectionObserver(
             entries => {
@@ -63,23 +59,26 @@ function Games() {
 
 
     return (
-        <div className="container" style={{ padding: '4rem 2rem' }}>
+        <div className="page-layout">
 
-            <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
+            <div className="container" style={{ marginBottom: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <h1 style={{ marginBottom: '2rem' }}>EXPLORAR JUEGOS</h1>
                 <input
                     type="text"
-                    placeholder="Buscar juegos..."
+                    placeholder="Busca tu próximo juego favorito..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="input-minimal"
+                    className="input-field"
                     style={{ maxWidth: '600px', textAlign: 'center' }}
                 />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-                {games.map(game => (
-                    <GameCard key={game.id} game={game} />
-                ))}
+            <div className="container h-full">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+                    {games.map(game => (
+                        <GameCard key={game.id} game={game} />
+                    ))}
+                </div>
             </div>
 
             {/* Scroll Trigger */}

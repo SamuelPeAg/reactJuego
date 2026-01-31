@@ -1,45 +1,40 @@
 import { Link } from 'react-router-dom';
-import Card from './ui/Card';
-import Badge from './ui/Badge';
 
 function GameCard({ game }) {
     if (!game) return null;
 
     return (
-        <Link to={`/game/${game.id}`}>
-            <Card className="p-0 h-full group relative overflow-hidden border border-white/5 hover:border-white/20">
-                <div className="absolute top-3 right-3 z-10">
-                    <Badge variant="rating" className="shadow-lg">{game.rating.toFixed(1)}</Badge>
-                </div>
-
-                <div className="h-[280px] w-full overflow-hidden relative">
+        <Link to={`/game/${game.id}`} style={{ display: 'block' }}>
+            <div className="card-glass" style={{ height: '100%' }}>
+                <div style={{ position: 'relative', height: '240px' }}>
                     <img
                         src={game.background_image}
                         alt={game.name}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:filter-none filter grayscale-[30%]"
+                        className="bg-cover"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)' }} />
+                    <span className="badge badge-rating" style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                        {game.rating.toFixed(1)}
+                    </span>
                 </div>
 
-                <div className="p-5 relative">
-                    <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-xl font-bold leading-tight group-hover:text-white transition-colors line-clamp-2">
-                            {game.name}
-                        </h3>
-                    </div>
-
-                    <div className="flex justify-between items-center text-sm text-gray-500 mt-4">
+                <div className="card-content">
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {game.name}
+                    </h3>
+                    <div className="flex justify-center" style={{ justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
                         <span>{game.released?.split('-')[0] || 'TBA'}</span>
-                        <div className="flex gap-2">
+                        <div className="flex gap-4" style={{ gap: '0.5rem' }}>
                             {game.parent_platforms?.slice(0, 3).map(p => (
-                                <span key={p.platform.id} className="text-xs uppercase tracking-wider opacity-70">
+                                <span key={p.platform.id} style={{ textTransform: 'uppercase' }}>
                                     {p.platform.name.slice(0, 3)}
                                 </span>
                             ))}
                         </div>
                     </div>
                 </div>
-            </Card>
+            </div>
         </Link>
     );
 }

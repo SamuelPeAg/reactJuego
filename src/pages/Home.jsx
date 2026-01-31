@@ -1,39 +1,79 @@
+import Link from 'react-router-dom/Link';
 import Carousel from '../components/Carousel';
-import { Link } from 'react-router-dom';
 
 function Home() {
     return (
-        <div className="container" style={{ padding: '2rem' }}>
+        <div className="page-layout">
             <Carousel />
 
-            <div style={{ textAlign: 'center', margin: '6rem 0' }}>
-                <h1 className="animate-enter" style={{ fontSize: '3.5rem', marginBottom: '1.5rem', letterSpacing: '-0.05em' }}>
-                    LA BASE DE DATOS DEFINITIVA
-                </h1>
-                <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto 3rem', lineHeight: '1.8' }}>
-                    Explora miles de títulos. Descubre tus nuevos favoritos. Potenciado por RAWG.
-                </p>
-                <Link to="/games">
-                    <button style={{ padding: '1rem 3rem', fontSize: '1rem', letterSpacing: '0.1em' }}>EXPLORAR CATÁLOGO</button>
+            <div className="container text-center mb-large">
+                <Link to="/games" className="btn btn-primary">
+                    EXPLORAR CATÁLOGO COMPLETO
                 </Link>
             </div>
 
-            <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', paddingBottom: '4rem' }}>
-                <div className="game-card" style={{ padding: '3rem', textAlign: 'left', minHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Búsqueda Avanzada</h2>
-                    <p style={{ margin: 0 }}>Encuentra cualquier juego en segundos con nuestro motor de búsqueda en tiempo real.</p>
+            <div className="container">
+                <div className="bento-grid">
+
+                    {/* Búsqueda (Large) */}
+                    <div className="span-8 card-glass" style={{ minHeight: '400px' }}>
+                        <div
+                            className="absolute inset-0 bg-cover"
+                            style={{
+                                backgroundImage: "url('https://media.rawg.io/media/games/20a/20aa03a10cda45239fe22d035c0ebe64.jpg')",
+                                opacity: 0.4
+                            }}
+                        />
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #000 0%, transparent 100%)' }} />
+                        <div className="card-content h-full flex flex-col justify-end">
+                            <h2>BÚSQUEDA AVANZADA</h2>
+                            <p>Encuentra tus juegos favoritos instantáneamente con nuestro motor optimizado.</p>
+                        </div>
+                    </div>
+
+                    {/* Tendencias (Small) */}
+                    <div className="span-4 card-glass" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+                        <div className="card-content">
+                            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🔥</div>
+                            <h3>Tendencias</h3>
+                            <p style={{ margin: 0 }}>Lo más jugado del momento.</p>
+                        </div>
+                    </div>
+
+                    {/* Datos (Small) */}
+                    <div className="span-4 card-glass">
+                        <div className="card-content h-full flex flex-col justify-between">
+                            <div>
+                                <h3>Datos en Tiempo Real</h3>
+                                <div style={{ height: '4px', width: '50px', background: 'white', marginTop: '1rem' }} />
+                            </div>
+                            <p style={{ fontSize: '0.9rem' }}>Powered by RAWG API. Metadatos precisos y actualizados al segundo.</p>
+                        </div>
+                    </div>
+
+                    {/* Favoritos (Medium) */}
+                    <div className="span-8 card-glass">
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                background: 'linear-gradient(45deg, rgba(30,58,138,0.3), rgba(88,28,135,0.3))'
+                            }}
+                        />
+                        <div className="card-content h-full flex items-center justify-between">
+                            <div>
+                                <h3>Tu Colección</h3>
+                                <p style={{ margin: 0 }}>Guarda y organiza tus descubrimientos.</p>
+                            </div>
+                            <Link to="/favorites" className="btn btn-secondary">
+                                IR A FAVORITOS
+                            </Link>
+                        </div>
+                    </div>
+
                 </div>
-                <div className="game-card" style={{ padding: '3rem', textAlign: 'left', minHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Tendencias</h2>
-                    <p style={{ margin: 0 }}>Descubre lo que el mundo está jugando ahora mismo con nuestros gráficos en vivo.</p>
-                </div>
-                <div className="game-card" style={{ padding: '3rem', textAlign: 'left', minHeight: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Estadísticas Detalladas</h2>
-                    <p style={{ margin: 0 }}>Accede a valoraciones, plataformas, fechas de lanzamiento e información del desarrollador.</p>
-                </div>
-            </section>
+            </div>
         </div>
     )
 }
 
-export default Home
+export default Home;
