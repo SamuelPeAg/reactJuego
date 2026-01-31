@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Premium Brand Colors */
+  --primary-hue: 250;
+  --primary-sat: 80%;
+  --primary-lig: 60%;
+  --primary: hsl(var(--primary-hue), var(--primary-sat), var(--primary-lig));
+  --primary-glow: hsl(var(--primary-hue), var(--primary-sat), 60%, 0.5);
+  --primary-dark: hsl(var(--primary-hue), var(--primary-sat), 20%);
+  
+  --accent-hue: 320;
+  --accent: hsl(var(--accent-hue), 80%, 60%);
+  
+  /* Neutral Palette */
+  --bg-dark: #0f0f13;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.1);
+  --text-main: #ffffff;
+  --text-muted: #a1a1aa;
+  
+  /* Radius & Spacing */
+  --radius-lg: 16px;
+  --radius-md: 8px;
+  --radius-sm: 4px;
+  
+  /* Transitions */
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  background-image: 
+    radial-gradient(circle at 15% 50%, var(--primary-dark), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(50, 0, 50, 0.2), transparent 25%);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--text-main);
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, var(--text-main), var(--primary-lig));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5em;
+}
+
+p {
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.glass-panel:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Modern Button */
+button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 0.8em 1.6em;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+button:active {
+  transform: translateY(0px);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-enter {
+  animation: fadeIn 0.6s ease-out forwards;
+}
