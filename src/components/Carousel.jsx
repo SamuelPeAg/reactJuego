@@ -29,50 +29,42 @@ function Carousel() {
         setCurrentIndex((prev) => (prev === 0 ? games.length - 1 : prev - 1));
     };
 
-    if (loading) return <div style={{ height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Cargando destacados...</div>;
+    if (loading) return <div style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading...</div>;
     if (games.length === 0) return null;
 
     const currentGame = games[currentIndex];
 
     return (
-        <div className="carousel-container" style={{ position: 'relative', height: '500px', borderRadius: '16px', overflow: 'hidden', marginBottom: '3rem' }}>
+        <div className="carousel-container" style={{ position: 'relative', height: '600px', borderRadius: '4px', overflow: 'hidden', marginBottom: '4rem' }}>
             <div
                 className="carousel-slide"
                 style={{
-                    backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.9), transparent), url(${currentGame.background_image})`,
+                    backgroundImage: `linear-gradient(to top, var(--bg-main), transparent 80%), url(${currentGame.background_image})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
-                    padding: '3rem'
+                    padding: '4rem'
                 }}
             >
-                <div className="animate-enter">
-                    <h2 style={{ fontSize: '3rem', margin: '0 0 1rem' }}>{currentGame.name}</h2>
-                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
-                        <span className="glass-panel" style={{ padding: '0.5rem 1rem' }}>⭐ {currentGame.rating}</span>
-                        <span className="glass-panel" style={{ padding: '0.5rem 1rem' }}>📅 {currentGame.released}</span>
+                <div className="animate-enter" style={{ maxWidth: '800px' }}>
+                    <h2 style={{ fontSize: '4rem', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>{currentGame.name}</h2>
+                    <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem', alignItems: 'center' }}>
+                        <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>{currentGame.rating.toFixed(1)} Rating</span>
+                        <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{currentGame.released}</span>
                     </div>
                     <Link to={`/game/${currentGame.id}`}>
-                        <button>Ver Detalles</button>
+                        <button>DETAILS</button>
                     </Link>
                 </div>
             </div>
 
-            <button
-                onClick={prevSlide}
-                style={{ position: 'absolute', left: '20px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', borderRadius: '50%', width: '50px', height: '50px', padding: 0 }}
-            >
-                ❮
-            </button>
-            <button
-                onClick={nextSlide}
-                style={{ position: 'absolute', right: '20px', top: '50%', transform: 'translateY(-50%)', background: 'rgba(0,0,0,0.5)', borderRadius: '50%', width: '50px', height: '50px', padding: 0 }}
-            >
-                ❯
-            </button>
+            <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', display: 'flex', gap: '1rem' }}>
+                <button className="secondary" onClick={prevSlide} style={{ padding: '0.5rem 1rem' }}>PREV</button>
+                <button className="secondary" onClick={nextSlide} style={{ padding: '0.5rem 1rem' }}>NEXT</button>
+            </div>
         </div>
     );
 }

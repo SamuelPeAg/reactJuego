@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getGames } from '../services/rawg';
 import GameCard from '../components/GameCard';
 
@@ -6,12 +6,20 @@ function Games() {
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
-    const fetchGames = async (query = '') => {
+    const observerTarget = useRef(null);
+
+    // Initial load and search
+    const fetchGames = async (query = '', pageNum = 1, shouldReplace = false) => {
+        if (loading) return;
         setLoading(true);
         try {
-            const data = await getGames(query);
-            setGames(data.results);
+            const data = await getGames(query, pageNum);
+            if (data.results.length === 0) setHasMore(false);
+
+            setGames(prev => shouldReplace ? data.results : [...prev, ...data.results]);
         } catch (error) {
             console.error(error);
         } finally {
@@ -19,49 +27,67 @@ function Games() {
         }
     };
 
+    // Search handler
     useEffect(() => {
-        fetchGames();
-    }, []);
+        // Reset state when search changes
+        setPage(1);
+        setHasMore(true);
+        setGames([]); // Clear current games
+        fetchGames(search, 1, true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [search]);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        fetchGames(search);
-    };
+    // Infinite Scroll Observer
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => {
+                if (entries[0].isIntersecting && hasMore && !loading && games.length > 0) {
+                    setPage(prev => {
+                        const nextPage = prev + 1;
+                        fetchGames(search, nextPage, false);
+                        return nextPage;
+                    });
+                }
+            },
+            { threshold: 1.0 }
+        );
+
+        if (observerTarget.current) {
+            observer.observe(observerTarget.current);
+        }
+
+        return () => {
+            if (observerTarget.current) observer.unobserve(observerTarget.current);
+        };
+    }, [hasMore, loading, search, games.length]);
+
 
     return (
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Explorar Juegos</h1>
+        <div className="container" style={{ padding: '4rem 2rem' }}>
 
-            <form onSubmit={handleSearch} style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem' }}>
+            <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
                 <input
                     type="text"
-                    placeholder="Buscar juegos (ej: GTA V, Mario...)"
+                    placeholder="Search games..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
-                    className="glass-panel"
-                    style={{
-                        width: '100%',
-                        maxWidth: '500px',
-                        padding: '1rem',
-                        color: 'white',
-                        fontSize: '1rem',
-                        border: '1px solid rgba(255,255,255,0.2)'
-                    }}
+                    className="input-minimal"
+                    style={{ maxWidth: '600px', textAlign: 'center' }}
                 />
-                <button type="submit">Buscar</button>
-            </form>
+            </div>
 
-            {loading ? (
-                <div style={{ textAlign: 'center' }}>Buscando...</div>
-            ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-                    {games.map(game => (
-                        <GameCard key={game.id} game={game} />
-                    ))}
-                </div>
-            )}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+                {games.map(game => (
+                    <GameCard key={game.id} game={game} />
+                ))}
+            </div>
 
-            {!loading && games.length === 0 && <p style={{ textAlign: 'center' }}>No se encontraron juegos.</p>}
+            {/* Scroll Trigger */}
+            <div ref={observerTarget} style={{ height: '50px', marginTop: '2rem', textAlign: 'center', opacity: 0.5 }}>
+                {loading && <span>Loading more...</span>}
+            </div>
+
+            {!loading && games.length === 0 && <p style={{ textAlign: 'center' }}>No results found.</p>}
         </div>
     );
 }
