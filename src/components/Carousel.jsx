@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getPopularGames } from '../services/rawg';
 import { Link } from 'react-router-dom';
+import Button from './ui/Button';
+import Loader from './ui/Loader';
+import Badge from './ui/Badge';
 
 function Carousel() {
     const [games, setGames] = useState([]);
@@ -11,7 +14,7 @@ function Carousel() {
         const fetchGames = async () => {
             try {
                 const data = await getPopularGames();
-                setGames(data.results.slice(0, 5)); // Top 5
+                setGames(data.results.slice(0, 5));
             } catch (error) {
                 console.error('Failed to fetch carousel games', error);
             } finally {
@@ -29,41 +32,60 @@ function Carousel() {
         setCurrentIndex((prev) => (prev === 0 ? games.length - 1 : prev - 1));
     };
 
-    if (loading) return <div style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Cargando...</div>;
+    if (loading) return <div className="h-[60vh] flex items-center justify-center"><Loader /></div>;
     if (games.length === 0) return null;
 
     const currentGame = games[currentIndex];
 
     return (
-        <div className="carousel-container" style={{ position: 'relative', height: '600px', borderRadius: '4px', overflow: 'hidden', marginBottom: '4rem' }}>
+        <div className="relative h-[75vh] w-full overflow-hidden mb-12 group">
+            {/* Background Image with Transition */}
             <div
-                className="carousel-slide"
-                style={{
-                    backgroundImage: `linear-gradient(to top, var(--bg-main), transparent 80%), url(${currentGame.background_image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    padding: '4rem'
-                }}
+                key={currentGame.id}
+                className="absolute inset-0 bg-cover bg-center transition-all duration-1000 transform scale-105"
+                style={{ backgroundImage: `url(${currentGame.background_image})` }}
             >
-                <div className="animate-enter" style={{ maxWidth: '800px' }}>
-                    <h2 style={{ fontSize: '4rem', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>{currentGame.name}</h2>
-                    <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem', alignItems: 'center' }}>
-                        <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>{currentGame.rating.toFixed(1)} Valoración</span>
-                        <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{currentGame.released}</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/80 via-transparent to-transparent" />
+            </div>
+
+            <div className="relative h-full container flex flex-col justify-center px-12">
+                <div className="max-w-3xl animate-fade-in space-y-6">
+                    <Badge variant="default" className="pulsing-badge">Destacado</Badge>
+                    <h1 className="text-7xl font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
+                        {currentGame.name}
+                    </h1>
+
+                    <div className="flex items-center gap-6 text-lg">
+                        <Badge variant="rating" className="text-xl px-4 py-1">{currentGame.rating.toFixed(1)}</Badge>
+                        <span className="text-gray-300 font-light tracking-widest">{currentGame.released?.split('-')[0]}</span>
+                        {currentGame.genres?.slice(0, 2).map((g, i) => (
+                            <span key={i} className="text-gray-400 uppercase text-sm tracking-widest font-semibold px-2 border-l border-white/20">
+                                {g.name}
+                            </span>
+                        ))}
                     </div>
-                    <Link to={`/game/${currentGame.id}`}>
-                        <button>DETALLES</button>
-                    </Link>
+
+                    <div className="pt-8 flex gap-4">
+                        <Link to={`/game/${currentGame.id}`}>
+                            <Button variant="primary" className="px-8 py-4 text-lg">Ver Detalles</Button>
+                        </Link>
+                        <Button variant="secondary" className="px-8 py-4 text-lg" onClick={nextSlide}>
+                            Siguiente Juego
+                        </Button>
+                    </div>
                 </div>
             </div>
 
-            <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', display: 'flex', gap: '1rem' }}>
-                <button className="secondary" onClick={prevSlide} style={{ padding: '0.5rem 1rem' }}>ANT</button>
-                <button className="secondary" onClick={nextSlide} style={{ padding: '0.5rem 1rem' }}>SIG</button>
+            {/* Navigation Indicators */}
+            <div className="absolute bottom-12 right-12 flex gap-4 z-20">
+                {games.map((_, idx) => (
+                    <button
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className={`h-1 transition-all duration-300 ${idx === currentIndex ? 'w-12 bg-white' : 'w-4 bg-white/30 hover:bg-white/60'}`}
+                    />
+                ))}
             </div>
         </div>
     );
