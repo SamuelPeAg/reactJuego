@@ -59,34 +59,47 @@ function Games() {
 
 
     return (
-        <div className="page-layout">
+        <div className="page-container">
 
-            <div className="container" style={{ marginBottom: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h1 style={{ marginBottom: '2rem' }}>EXPLORAR JUEGOS</h1>
-                <input
-                    type="text"
-                    placeholder="Busca tu próximo juego favorito..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="input-field"
-                    style={{ maxWidth: '600px', textAlign: 'center' }}
-                />
-            </div>
+            <div className="text-center animate-in" style={{ marginBottom: '6rem' }}>
+                <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-secondary)', marginBottom: '1.5rem' }}>CATÁLOGO GLOBAL</h2>
+                <h1 className="text-gradient" style={{ marginBottom: '3rem' }}>EXPLORA EL UNIVERSO</h1>
 
-            <div className="container h-full">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
-                    {games.map(game => (
-                        <GameCard key={game.id} game={game} />
-                    ))}
+                <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
+                    <input
+                        type="text"
+                        placeholder="Busca cualquier juego..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="search-nova"
+                    />
+                    {loading && (
+                        <div style={{ position: 'absolute', right: '3rem', top: '50%', transform: 'translateY(-50%)' }}>
+                            <div style={{ width: '20px', height: '20px', border: '2px solid rgba(255,255,255,0.1)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
+                        </div>
+                    )}
                 </div>
             </div>
 
-            {/* Scroll Trigger */}
-            <div ref={observerTarget} style={{ height: '50px', marginTop: '2rem', textAlign: 'center', opacity: 0.5 }}>
-                {loading && <span>Cargando más...</span>}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
+                {games.map(game => (
+                    <GameCard key={game.id} game={game} />
+                ))}
             </div>
 
-            {!loading && games.length === 0 && <p style={{ textAlign: 'center' }}>No se encontraron resultados.</p>}
+            <div ref={observerTarget} style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                {loading && <p style={{ fontSize: '1.5rem', opacity: 0.5 }}>Cargando...</p>}
+            </div>
+
+            {!loading && games.length === 0 && (
+                <div className="text-center glass-panel" style={{ padding: '6rem' }}>
+                    <h2 style={{ opacity: 0.5 }}>No se encontraron resultados</h2>
+                </div>
+            )}
+
+            <style>{`
+        @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
+      `}</style>
         </div>
     );
 }

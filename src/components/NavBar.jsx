@@ -3,25 +3,22 @@ import { Link, useLocation } from 'react-router-dom';
 function NavBar() {
     const location = useLocation();
 
-    const getLinkClass = (path) => {
-        const active = location.pathname === path ? 'active' : '';
-        return `nav-link ${active}`;
-    };
+    const isActive = (path) => location.pathname === path;
 
     return (
-        <nav className="nav-fixed">
-            <Link to="/" style={{ fontSize: '1.5rem', fontWeight: '800', letterSpacing: '-0.05em' }}>
-                GAME<span style={{ fontWeight: '300', color: 'var(--text-tertiary)' }}>EXPLORER</span>
+        <nav className="nav-nova">
+            <Link to="/" style={{ fontSize: '1.2rem', fontWeight: '900', color: 'white', letterSpacing: '-0.05em', marginRight: '1rem' }}>
+                NOVA<span style={{ fontWeight: '200', opacity: 0.6 }}>DB</span>
             </Link>
 
-            <div className="flex items-center">
-                <Link to="/" className={getLinkClass('/')}>
+            <div className="flex items-center gap-8">
+                <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
                     Inicio
                 </Link>
-                <Link to="/games" className={getLinkClass('/games')}>
+                <Link to="/games" className={`nav-link ${isActive('/games') ? 'active' : ''}`}>
                     Explorar
                 </Link>
-                <Link to="/favorites" className={getLinkClass('/favorites')}>
+                <Link to="/favorites" className={`nav-link ${isActive('/favorites') ? 'active' : ''}`}>
                     Favoritos
                 </Link>
             </div>

@@ -21,10 +21,11 @@ function GameDetails() {
             }
         };
         fetchDetails();
+        window.scrollTo(0, 0);
     }, [id]);
 
-    if (loading) return <div style={{ paddingTop: '100px', textAlign: 'center' }}>Cargando detalles...</div>;
-    if (!game) return <div style={{ paddingTop: '100px', textAlign: 'center' }}>Juego no encontrado.</div>;
+    if (loading) return <div className="page-container text-center"><h1>Cargando...</h1></div>;
+    if (!game) return <div className="page-container text-center"><h1>No encontrado</h1></div>;
 
     const favorited = isFavorite(game.id);
 
@@ -37,77 +38,90 @@ function GameDetails() {
     };
 
     return (
-        <div style={{ paddingBottom: '4rem' }}>
-            {/* Immersive Hero */}
-            <div style={{
-                height: '75vh',
-                position: 'relative',
-                marginBottom: '2rem'
-            }}>
-                <div style={{
-                    position: 'absolute', inset: 0,
-                    backgroundImage: `url(${game.background_image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: 0.4
-                }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #030303 0%, transparent 100%)' }} />
+        <div style={{ minHeight: '100vh', background: 'var(--bg-dark)' }}>
+            {/* Immersive Header */}
+            <div style={{ position: 'relative', height: '85vh', width: '100%', overflow: 'hidden' }}>
+                <div
+                    style={{
+                        position: 'absolute', inset: 0,
+                        backgroundImage: `url(${game.background_image})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        transform: 'scale(1.05)'
+                    }}
+                />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark) 0%, transparent 80%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.2), transparent 70%)' }} />
 
-                <div className="container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'flex-end', paddingBottom: '4rem' }}>
-                    <div style={{ width: '100%' }}>
-                        <h1 style={{ fontSize: '5rem', marginBottom: '1rem', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>{game.name}</h1>
-                        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-                            <span className="badge badge-rating" style={{ fontSize: '1.2rem', padding: '0.4rem 1rem' }}>
+                <div className="page-container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'flex-end', paddingBottom: '6rem' }}>
+                    <div className="animate-in w-full">
+                        <div className="flex items-center gap-4" style={{ marginBottom: '2rem' }}>
+                            {game.genres?.map(g => (
+                                <span key={g.id} style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--accent-secondary)' }}>
+                                    {g.name}
+                                </span>
+                            ))}
+                        </div>
+
+                        <h1 className="text-gradient" style={{ marginBottom: '2rem' }}>{game.name}</h1>
+
+                        <div className="flex items-center gap-8">
+                            <div style={{ background: 'white', color: 'black', padding: '0.5rem 1.5rem', borderRadius: '4px', fontWeight: '900', fontSize: '1.25rem' }}>
                                 {game.rating.toFixed(1)}
-                            </span>
+                            </div>
+
                             <button
                                 onClick={toggleFavorite}
-                                className={favorited ? 'btn btn-secondary' : 'btn btn-primary'}
-                                style={{ minWidth: '220px' }}
+                                className={`btn-nova ${favorited ? '' : 'primary'}`}
+                                style={{ minWidth: '280px', height: '60px' }}
                             >
-                                {favorited ? 'QUITAR DE FAVORITOS' : 'AÑADIR A FAVORITOS'}
+                                {favorited ? 'QUITAR DE MI COLECCIÓN' : 'AÑADIR A MI COLECCIÓN'}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className="container" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '4rem' }}>
-                <div>
-                    <h3 style={{ borderBottom: '1px solid var(--border-subtle)', paddingBottom: '1rem', marginBottom: '2rem' }}>Sobre el juego</h3>
+            <div className="page-container" style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '5rem', paddingTop: '4rem' }}>
+                <div className="animate-in" style={{ animationDelay: '0.2s' }}>
+                    <h3 style={{ fontSize: '1.5rem', color: 'white', marginBottom: '2rem', borderLeft: '4px solid var(--accent-primary)', paddingLeft: '1.5rem' }}>SINOPSIS</h3>
                     <div
                         dangerouslySetInnerHTML={{ __html: game.description }}
-                        style={{ lineHeight: '1.8', color: 'var(--text-secondary)', fontSize: '1.1rem' }}
+                        style={{ lineHeight: '2', color: 'var(--text-muted)', fontSize: '1.1rem', textAlign: 'justify' }}
                     />
                 </div>
 
-                <div className="card-glass" style={{ padding: '2rem', height: 'fit-content' }}>
-                    <div className="mb-small">
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Lanzamiento</h4>
-                        <p style={{ color: 'white', margin: 0 }}>{game.released}</p>
-                    </div>
-
-                    <div className="mb-small">
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Géneros</h4>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
-                            {game.genres?.map(g => (
-                                <span key={g.id} className="badge">{g.name}</span>
-                            ))}
+                <div className="animate-in" style={{ animationDelay: '0.4s' }}>
+                    <div className="glass-panel" style={{ padding: '3rem' }}>
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--accent-secondary)', fontWeight: '800', opacity: 0.6 }}>LANZAMIENTO</span>
+                            <p style={{ color: 'white', fontSize: '1.25rem', marginTop: '0.5rem', fontWeight: '600' }}>{game.released}</p>
                         </div>
-                    </div>
 
-                    <div className="mb-small">
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.875rem', textTransform: 'uppercase' }}>Plataformas</h4>
-                        <p style={{ color: 'white', margin: 0 }}>{game.platforms?.map(p => p.platform.name).join(', ')}</p>
-                    </div>
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--accent-secondary)', fontWeight: '800', opacity: 0.6 }}>PLATAFORMAS</span>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
+                                {game.platforms?.map(p => (
+                                    <span key={p.platform.id} className="btn-nova" style={{ padding: '0.4rem 0.8rem', fontSize: '0.7rem' }}>
+                                        {p.platform.name}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
 
-                    {game.website && (
-                        <div style={{ marginTop: '2rem' }}>
-                            <a href={game.website} target="_blank" rel="noreferrer" className="btn btn-secondary" style={{ width: '100%' }}>
-                                Visitar Web Oficial
+                        <div style={{ marginBottom: '2.5rem' }}>
+                            <span style={{ fontSize: '0.7rem', color: 'var(--accent-secondary)', fontWeight: '800', opacity: 0.6 }}>DESARROLLADOR</span>
+                            <p style={{ color: 'white', fontSize: '1.1rem', marginTop: '0.5rem' }}>
+                                {game.developers?.map(d => d.name).join(', ') || 'Desconocido'}
+                            </p>
+                        </div>
+
+                        {game.website && (
+                            <a href={game.website} target="_blank" rel="noreferrer" className="btn-nova primary" style={{ width: '100%', justifyContent: 'center' }}>
+                                WEB OFICIAL
                             </a>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

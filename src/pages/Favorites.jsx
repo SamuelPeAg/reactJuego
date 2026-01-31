@@ -1,20 +1,27 @@
-import GameCard from '../components/GameCard';
 import { useFavorites } from '../hooks/useFavorites';
+import GameCard from '../components/GameCard';
+import { Link } from 'react-router-dom';
 
 function Favorites() {
     const { favorites } = useFavorites();
 
     return (
-        <div className="container" style={{ padding: '4rem 2rem' }}>
-            <h1 style={{ marginBottom: '3rem' }}>Mis Favoritos</h1>
+        <div className="page-container">
+            <div className="text-center animate-in" style={{ marginBottom: '6rem' }}>
+                <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-primary)', marginBottom: '1.5rem' }}>TU BIBLIOTECA</h2>
+                <h1 className="text-gradient">MIS FAVORITOS</h1>
+            </div>
 
             {favorites.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '4rem', border: '1px dashed var(--text-tertiary)', borderRadius: '8px' }}>
-                    <p>Tu colección está vacía.</p>
-                    <a href="/games" style={{ textDecoration: 'underline' }}>Explorar catálogo</a>
+                <div className="glass-panel animate-in" style={{ padding: '8rem', textAlign: 'center' }}>
+                    <div style={{ fontSize: '4rem', marginBottom: '2rem' }}>🌑</div>
+                    <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', marginBottom: '3rem' }}>Aún no has añadido nada a tu colección personal.</p>
+                    <Link to="/games" className="btn-nova primary">
+                        EXPLORAR JUEGOS
+                    </Link>
                 </div>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2rem' }}>
+                <div className="animate-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
                     {favorites.map(game => (
                         <GameCard key={game.id} game={game} />
                     ))}
