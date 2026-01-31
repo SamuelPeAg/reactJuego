@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getGames } from '../services/rawg';
 import GameCard from '../components/GameCard';
 import SearchBar from '../components/SearchBar';
 
 function Games() {
+    const [searchParams] = useSearchParams();
+    const genreParam = searchParams.get('genre') || '';
+
     const [games, setGames] = useState([]);
     const [search, setSearch] = useState('');
     const [loading, setLoading] = useState(false);
@@ -16,7 +20,7 @@ function Games() {
         if (loading) return;
         setLoading(true);
         try {
-            const data = await getGames(query, pageNum);
+            const data = await getGames(query, pageNum, genreParam);
             if (data.results.length === 0) setHasMore(false);
 
             setGames(prev => shouldReplace ? data.results : [...prev, ...data.results]);
@@ -33,7 +37,7 @@ function Games() {
         setGames([]);
         fetchGames(search, 1, true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search]);
+    }, [search, genreParam]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -63,8 +67,12 @@ function Games() {
         <div className="page-container">
 
             <div className="animate-in" style={{ marginBottom: '6rem', paddingLeft: '2rem' }}>
-                <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-secondary)', marginBottom: '1.5rem' }}>CATÁLOGO GLOBAL</h2>
-                <h1 className="text-gradient" style={{ marginBottom: '3rem' }}>EXPLORA EL UNIVERSO</h1>
+                <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-secondary)', marginBottom: '1.5rem' }}>
+                    {genreParam ? `GÉNERO: ${genreParam.toUpperCase()}` : 'CATÁLOGO GLOBAL'}
+                </h2>
+                <h1 className="text-gradient" style={{ marginBottom: '3rem' }}>
+                    {genreParam ? 'FILTRANDO EL UNIVERSO' : 'EXPLORA EL UNIVERSO'}
+                </h1>
 
                 <SearchBar value={search} onChange={setSearch} loading={loading} />
             </div>

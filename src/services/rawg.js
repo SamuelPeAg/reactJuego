@@ -1,10 +1,11 @@
 const API_KEY = 'b39ef92e897f4d57a63c3ca231c0dc1b';
 const BASE_URL = 'https://api.rawg.io/api';
 
-export const getGames = async (search = '', page = 1) => {
+export const getGames = async (search = '', page = 1, genres = '') => {
     try {
         const query = search ? `&search=${search}` : '';
-        const response = await fetch(`${BASE_URL}/games?key=${API_KEY}&page=${page}${query}&page_size=20`);
+        const genreQuery = genres ? `&genres=${genres}` : '';
+        const response = await fetch(`${BASE_URL}/games?key=${API_KEY}&page=${page}${query}${genreQuery}&page_size=20`);
         if (!response.ok) throw new Error('Network response was not ok');
         return await response.json();
     } catch (error) {
