@@ -67,7 +67,7 @@ function Carousel() {
                 borderRadius: '40px',
                 marginBottom: '8rem',
                 cursor: 'pointer',
-                boxShadow: '0 40px 100px -20px rgba(0,0,0,0.8)'
+                boxShadow: '0 25px 50px -12px rgba(0,0,0,0.4)'
             }}
         >
             {/* Background Layers */}
@@ -86,12 +86,12 @@ function Carousel() {
                         zIndex: index === currentIndex ? 1 : 0
                     }}
                 >
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark) 0%, transparent 60%, rgba(0,0,0,0.3) 100%)' }} />
-                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark) 0%, transparent 70%)' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark) 0%, transparent 40%, rgba(0,0,0,0.1) 100%)' }} />
+                    <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, var(--bg-dark) 0%, transparent 50%)' }} />
                 </div>
             ))}
 
-            <div className="container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center', padding: '0 6rem', zIndex: 10 }}>
+            <div className="container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center', padding: '0 8rem', zIndex: 10 }}>
                 <div style={{ maxWidth: '900px' }}>
                     <div className="flex items-center gap-4" style={{ marginBottom: '2.5rem' }}>
                         <span style={{
@@ -139,7 +139,7 @@ function Carousel() {
             </div>
 
             {/* Slide Indicators */}
-            <div style={{ position: 'absolute', bottom: '4rem', right: '6rem', display: 'flex', gap: '0.75rem', zIndex: 20 }}>
+            <div style={{ position: 'absolute', bottom: '4rem', right: '8rem', display: 'flex', gap: '0.75rem', zIndex: 20 }}>
                 {games.map((_, i) => (
                     <div
                         key={i}

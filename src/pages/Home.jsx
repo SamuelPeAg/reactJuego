@@ -6,7 +6,7 @@ function Home() {
         <div className="page-container">
             <Carousel />
 
-            <div className="animate-in mb-xl" style={{ animationDelay: '0.2s', paddingLeft: '2rem' }}>
+            <div className="animate-in mb-xl" style={{ animationDelay: '0.2s', paddingLeft: '4rem' }}>
                 <h2 style={{ fontSize: '1rem', color: 'var(--accent-primary)', letterSpacing: '0.5em', marginBottom: '1.5rem', fontWeight: '800' }}>
                     EXPERIENCIA DEFINITIVA
                 </h2>
@@ -21,7 +21,7 @@ function Home() {
             <div className="bento-nova animate-in" style={{ animationDelay: '0.4s' }}>
 
                 {/* Big Card - Smart Search */}
-                <div className="span-large glass-panel relative overflow-hidden group" style={{ minHeight: '600px' }}>
+                <div className="span-full glass-panel relative overflow-hidden group" style={{ minHeight: '600px' }}>
                     <div
                         className="absolute inset-0 transition-transform duration-1000 group-hover:scale-110"
                         style={{
@@ -41,28 +41,9 @@ function Home() {
                     </div>
                 </div>
 
-                {/* Stat Card */}
-                <div className="span-small glass-panel flex flex-col justify-center items-center text-center p-12">
-                    <span style={{ fontSize: '0.9rem', letterSpacing: '0.2em', opacity: 0.6, marginBottom: '1rem' }}>BASE DE DATOS</span>
-                    <h3 style={{ fontSize: '5rem', marginBottom: '0', fontWeight: '900' }} className="text-gradient">800K+</h3>
-                    <p style={{ textTransform: 'uppercase', letterSpacing: '0.15em', fontWeight: '700', fontSize: '0.75rem', marginTop: '1rem' }}>Juegos Indexados</p>
-                    <div style={{ height: '2px', width: '60px', background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))', margin: '2.5rem 0' }} />
-                    <p style={{ margin: 0, fontSize: '0.95rem', color: 'var(--text-muted)' }}>Monitoreo constante de lanzamientos mundiales en tiempo real.</p>
-                </div>
-
-                {/* Small Highlight */}
-                <div className="span-small glass-panel p-10 flex flex-col justify-between group">
-                    <div style={{ fontSize: '3.5rem', transition: 'transform 0.5s ease' }} className="group-hover:scale-110">💎</div>
-                    <div>
-                        <h3 style={{ marginBottom: '1rem', fontSize: '1.75rem' }}>Estatus Pro</h3>
-                        <p style={{ fontSize: '0.95rem', margin: 0, color: 'var(--text-muted)' }}>
-                            Crea colecciones personalizadas, exporta tus listas y visualiza estadísticas de tus juegos favoritos.
-                        </p>
-                    </div>
-                </div>
 
                 {/* Wide Link - Favorites */}
-                <div className="span-large glass-panel overflow-hidden relative group">
+                <div className="span-full glass-panel overflow-hidden relative group">
                     <div className="absolute inset-0 opacity-20" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }} />
                     <div className="relative p-12 flex items-center justify-between">
                         <div>

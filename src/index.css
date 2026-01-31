@@ -78,7 +78,7 @@ body::before {
 .page-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 120px 4rem 8rem;
+  padding: 120px 8rem 8rem;
 }
 
 @media (max-width: 768px) {
