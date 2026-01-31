@@ -21,7 +21,7 @@ function Home() {
             <div className="bento-nova animate-in" style={{ animationDelay: '0.4s' }}>
 
                 {/* Big Card - Smart Search */}
-                <div className="span-full glass-panel relative overflow-hidden group" style={{ minHeight: '600px' }}>
+                <div className="span-full glass-panel relative overflow-hidden group" style={{ minHeight: '600px', display: 'flex', alignItems: 'center' }}>
                     <div
                         className="absolute inset-0 transition-transform duration-1000 group-hover:scale-110"
                         style={{
@@ -31,36 +31,68 @@ function Home() {
                             opacity: 0.4
                         }}
                     />
-                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, var(--bg-dark) 5%, transparent)' }} />
-                    <div className="relative h-full flex flex-col justify-end p-12">
-                        <span style={{ color: 'var(--accent-secondary)', fontWeight: '800', letterSpacing: '0.3em', fontSize: '0.8rem', marginBottom: '1.5rem' }}>TECNOLOGÍA</span>
-                        <h2 style={{ fontSize: '3.5rem', maxWidth: '700px', lineHeight: '1' }}>FILTRADO<br />INTELIGENTE</h2>
-                        <p style={{ fontSize: '1.2rem', marginTop: '1.5rem', maxWidth: '500px', color: 'var(--text-muted)' }}>
-                            Encuentra exactamente lo que buscas con nuestro motor de búsqueda avanzado. Millones de datos a tu disposición.
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, var(--bg-dark) 30%, transparent)' }} />
+                    <div className="relative p-12 lg:p-24 z-10">
+                        <span style={{ color: 'var(--accent-secondary)', fontWeight: '800', letterSpacing: '0.3em', fontSize: '0.8rem', marginBottom: '1.5rem', display: 'block' }}>FUNCIONALIDAD PRINCIPAL</span>
+                        <h2 style={{ fontSize: '3.5rem', maxWidth: '600px', lineHeight: '1.1', marginBottom: '2rem' }}>BÚSQUEDA<br />SIN FRONTERAS</h2>
+                        <p style={{ fontSize: '1.2rem', maxWidth: '500px', color: 'var(--text-muted)', marginBottom: '3rem', lineHeight: '1.8' }}>
+                            Nuestro motor conectado a RAWG te permite filtrar entre más de 500,000 títulos. Encuentra joyas ocultas por género, plataforma o calificación en milisegundos.
                         </p>
+                        <div className="flex gap-4">
+                            <div className="glass-panel" style={{ padding: '1rem 2rem', borderRadius: '12px', border: '1px solid var(--accent-primary)' }}>
+                                <span style={{ fontSize: '1.5rem', fontWeight: '800' }}>500K+</span>
+                                <p style={{ fontSize: '0.7rem', opacity: 0.6 }}>JUEGOS</p>
+                            </div>
+                            <div className="glass-panel" style={{ padding: '1rem 2rem', borderRadius: '12px', border: '1px solid var(--accent-secondary)' }}>
+                                <span style={{ fontSize: '1.5rem', fontWeight: '800' }}>50+</span>
+                                <p style={{ fontSize: '0.7rem', opacity: 0.6 }}>PLATAFORMAS</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-
-                {/* Wide Link - Favorites */}
-                <div className="span-full glass-panel overflow-hidden relative group">
-                    <div className="absolute inset-0 opacity-20" style={{ background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))' }} />
-                    <div className="relative p-12 flex items-center justify-between">
-                        <div>
-                            <span style={{ color: 'var(--accent-primary)', fontWeight: '800', letterSpacing: '0.2em', fontSize: '0.8rem', display: 'block', marginBottom: '1rem' }}>BIBLIOTECA</span>
-                            <h2 style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>TUS FAVORITOS</h2>
-                            <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '1.1rem' }}>Donde tus juegos más amados descansan.</p>
-                        </div>
-                        <Link to="/favorites" className="btn-nova" style={{ background: 'white', color: 'black', border: 'none' }}>
-                            VER MI LISTA
+                {/* Left Card - Explore */}
+                <div className="span-large glass-panel overflow-hidden relative group">
+                    <div className="absolute inset-0 opacity-10 bg-white" />
+                    <div className="p-12 relative">
+                        <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>EXPLORA TÍTULOS</h3>
+                        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Navega por la base de datos más completa del mundo. Descubre lanzamientos, clásicos y lo más esperado.</p>
+                        <Link to="/games" className="btn-nova" style={{ border: '1px solid var(--accent-primary)' }}>
+                            IR AL BUSCADOR
                         </Link>
                     </div>
                 </div>
 
+                {/* Right Card - Favorites */}
+                <div className="span-small glass-panel overflow-hidden relative group" style={{ background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2), transparent)' }}>
+                    <div className="p-12 relative flex flex-col justify-between h-full">
+                        <div>
+                            <h3 style={{ fontSize: '2rem', marginBottom: '1rem' }}>TUS FAVORITOS</h3>
+                            <p style={{ color: 'var(--text-muted)' }}>Crea tu propia colección personalizada.</p>
+                        </div>
+                        <Link to="/favorites" className="btn-nova primary">
+                            COLECCIÓN
+                        </Link>
+                    </div>
+                </div>
+
+            </div>
+
+            {/* Categorías (Future thought requirement) */}
+            <div className="animate-in" style={{ marginTop: '8rem', paddingLeft: '2rem' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: '800', letterSpacing: '0.2em' }}>PRÓXIMAMENTE</span>
+                <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', marginBottom: '3rem' }}>EXPLORA POR GÉNERO</h2>
+                <div className="flex gap-4 flex-wrap">
+                    {['Acción', 'Aventura', 'RPG', 'Shooter', 'Puzzle', 'Indie'].map(cat => (
+                        <div key={cat} className="glass-panel" style={{ padding: '2rem 3.5rem', borderRadius: '20px', cursor: 'default', opacity: 0.6 }}>
+                            <span style={{ fontSize: '1.2rem', fontWeight: '700' }}>{cat}</span>
+                        </div>
+                    ))}
+                </div>
+                <p style={{ marginTop: '2rem', color: 'var(--text-muted)', fontSize: '0.9rem', fontStyle: 'italic' }}>* Navegación por categorías disponible en la próxima actualización.</p>
             </div>
         </div>
     )
 }
 
 export default Home;
-

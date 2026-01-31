@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { getGames } from '../services/rawg';
 import GameCard from '../components/GameCard';
+import SearchBar from '../components/SearchBar';
 
 function Games() {
     const [games, setGames] = useState([]);
@@ -65,21 +66,7 @@ function Games() {
                 <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-secondary)', marginBottom: '1.5rem' }}>CATÁLOGO GLOBAL</h2>
                 <h1 className="text-gradient" style={{ marginBottom: '3rem' }}>EXPLORA EL UNIVERSO</h1>
 
-
-                <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
-                    <input
-                        type="text"
-                        placeholder="Busca cualquier juego..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="search-nova"
-                    />
-                    {loading && (
-                        <div style={{ position: 'absolute', right: '3rem', top: '50%', transform: 'translateY(-50%)' }}>
-                            <div style={{ width: '20px', height: '20px', border: '2px solid rgba(255,255,255,0.1)', borderTopColor: 'white', borderRadius: '50%', animation: 'spin 1s linear infinite' }} />
-                        </div>
-                    )}
-                </div>
+                <SearchBar value={search} onChange={setSearch} loading={loading} />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '2rem' }}>
@@ -97,10 +84,6 @@ function Games() {
                     <h2 style={{ opacity: 0.5 }}>No se encontraron resultados</h2>
                 </div>
             )}
-
-            <style>{`
-        @keyframes spin { to { transform: translateY(-50%) rotate(360deg); } }
-      `}</style>
         </div>
     );
 }

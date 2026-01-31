@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import Games from './pages/Games';
 import GameDetails from './pages/GameDetails';
@@ -9,13 +10,16 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/games" element={<Games />} />
-        <Route path="/game/:id" element={<GameDetails />} />
-        <Route path="/favorites" element={<Favorites />} />
-      </Routes>
+      <Header />
+      <main style={{ minHeight: '100vh' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/games" element={<Games />} />
+          <Route path="/game/:id" element={<GameDetails />} />
+          <Route path="/favorites" element={<Favorites />} />
+        </Routes>
+      </main>
+      <Footer />
     </Router>
   );
 }

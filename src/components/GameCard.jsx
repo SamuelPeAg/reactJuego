@@ -38,7 +38,7 @@ function GameCard({ game }) {
                         </span>
 
                         <div className="flex gap-2">
-                            {game.parent_platforms?.slice(0, 3).map(p => (
+                            {(game.parent_platforms || game.platforms)?.slice(0, 3).map(p => (
                                 <span key={p.platform.id} style={{ fontSize: '0.65rem', opacity: 0.5, textTransform: 'uppercase', fontWeight: '600' }}>
                                     {p.platform.name.slice(0, 3)}
                                 </span>

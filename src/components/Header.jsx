@@ -1,17 +1,17 @@
 import { Link, useLocation } from 'react-router-dom';
 
-function NavBar() {
+function Header() {
     const location = useLocation();
 
     const isActive = (path) => location.pathname === path;
 
     return (
-        <nav className="nav-nova">
-            <Link to="/" style={{ fontSize: '1.2rem', fontWeight: '900', color: 'white', letterSpacing: '-0.05em', marginRight: '1rem' }}>
+        <header className="nav-nova">
+            <Link to="/" style={{ fontSize: '1.2rem', fontWeight: '900', color: 'white', letterSpacing: '-0.05em', marginRight: '1rem', textDecoration: 'none' }}>
                 NOVA<span style={{ fontWeight: '200', opacity: 0.6 }}>DB</span>
             </Link>
 
-            <div className="flex items-center gap-8">
+            <nav className="flex items-center gap-8">
                 <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
                     Inicio
                 </Link>
@@ -21,9 +21,9 @@ function NavBar() {
                 <Link to="/favorites" className={`nav-link ${isActive('/favorites') ? 'active' : ''}`}>
                     Favoritos
                 </Link>
-            </div>
-        </nav>
+            </nav>
+        </header>
     );
 }
 
-export default NavBar;
+export default Header;
