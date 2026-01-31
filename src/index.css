@@ -76,10 +76,17 @@ body::before {
 
 /* --- Layout --- */
 .page-container {
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 100px 2rem 4rem;
+  padding: 120px 4rem 8rem;
 }
+
+@media (max-width: 768px) {
+  .page-container {
+    padding: 100px 1.5rem 4rem;
+  }
+}
+
 
 /* --- Typography --- */
 h1,
@@ -102,9 +109,11 @@ h2 {
 
 .text-gradient {
   background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 
 /* --- UI Elements --- */
 .glass-panel {
@@ -258,6 +267,52 @@ h2 {
 .animate-in {
   animation: slideUp 0.8s var(--transition-smooth) forwards;
 }
+
+/* --- Spacing Utilities --- */
+.mb-small {
+  margin-bottom: 1rem;
+}
+
+.mb-medium {
+  margin-bottom: 2.5rem;
+}
+
+.mb-large {
+  margin-bottom: 5rem;
+}
+
+.mb-xl {
+  margin-bottom: 8rem;
+}
+
+.mt-small {
+  margin-top: 1rem;
+}
+
+.mt-medium {
+  margin-top: 2.5rem;
+}
+
+.mt-large {
+  margin-top: 5rem;
+}
+
+.gap-none {
+  gap: 0;
+}
+
+.gap-small {
+  gap: 1rem;
+}
+
+.gap-medium {
+  gap: 2rem;
+}
+
+.gap-large {
+  gap: 4rem;
+}
+
 
 /* Utils */
 .flex {

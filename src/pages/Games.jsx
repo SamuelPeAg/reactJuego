@@ -61,9 +61,10 @@ function Games() {
     return (
         <div className="page-container">
 
-            <div className="text-center animate-in" style={{ marginBottom: '6rem' }}>
+            <div className="animate-in" style={{ marginBottom: '6rem', paddingLeft: '2rem' }}>
                 <h2 style={{ fontSize: '0.75rem', letterSpacing: '0.4em', color: 'var(--accent-secondary)', marginBottom: '1.5rem' }}>CATÁLOGO GLOBAL</h2>
                 <h1 className="text-gradient" style={{ marginBottom: '3rem' }}>EXPLORA EL UNIVERSO</h1>
+
 
                 <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
                     <input

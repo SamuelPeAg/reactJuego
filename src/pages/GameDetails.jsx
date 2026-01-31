@@ -53,8 +53,9 @@ function GameDetails() {
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, var(--bg-dark) 0%, transparent 80%)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at bottom, rgba(139, 92, 246, 0.2), transparent 70%)' }} />
 
-                <div className="page-container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'flex-end', paddingBottom: '6rem' }}>
+                <div className="page-container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'flex-end', paddingBottom: '6rem', paddingTop: 0 }}>
                     <div className="animate-in w-full">
+
                         <div className="flex items-center gap-4" style={{ marginBottom: '2rem' }}>
                             {game.genres?.map(g => (
                                 <span key={g.id} style={{ fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.2em', color: 'var(--accent-secondary)' }}>
