@@ -68,7 +68,7 @@ function Games() {
             <div style={{ marginBottom: '4rem', textAlign: 'center' }}>
                 <input
                     type="text"
-                    placeholder="Search games..."
+                    placeholder="Buscar juegos..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     className="input-minimal"
@@ -84,10 +84,10 @@ function Games() {
 
             {/* Scroll Trigger */}
             <div ref={observerTarget} style={{ height: '50px', marginTop: '2rem', textAlign: 'center', opacity: 0.5 }}>
-                {loading && <span>Loading more...</span>}
+                {loading && <span>Cargando más...</span>}
             </div>
 
-            {!loading && games.length === 0 && <p style={{ textAlign: 'center' }}>No results found.</p>}
+            {!loading && games.length === 0 && <p style={{ textAlign: 'center' }}>No se encontraron resultados.</p>}
         </div>
     );
 }

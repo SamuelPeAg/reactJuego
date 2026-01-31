@@ -15,9 +15,9 @@ function NavBar() {
                 GameExplorer
             </Link>
             <div style={{ display: 'flex', gap: '3rem' }}>
-                <Link to="/" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Home</Link>
-                <Link to="/games" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Explore</Link>
-                <Link to="/favorites" style={{ fontSize: '0.9rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Favorites</Link>
+                <Link to="/" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Inicio</Link>
+                <Link to="/games" style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Explorar</Link>
+                <Link to="/favorites" style={{ fontSize: '0.9rem', color: 'var(--text-primary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Favoritos</Link>
             </div>
         </nav>
     );

@@ -23,8 +23,8 @@ function GameDetails() {
         fetchDetails();
     }, [id]);
 
-    if (loading) return <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Loading details...</div>;
-    if (!game) return <div style={{ padding: '4rem', textAlign: 'center' }}>Game not found.</div>;
+    if (loading) return <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--text-secondary)' }}>Cargando detalles...</div>;
+    if (!game) return <div style={{ padding: '4rem', textAlign: 'center' }}>Juego no encontrado.</div>;
 
     const favorited = isFavorite(game.id);
 
@@ -66,14 +66,14 @@ function GameDetails() {
                                     background: favorited ? 'transparent' : 'white',
                                     color: favorited ? 'white' : 'black',
                                     border: '1px solid white',
-                                    minWidth: '180px'
+                                    minWidth: '220px'
                                 }}
                             >
-                                {favorited ? 'REMOVE FROM LIBRARY' : 'ADD TO LIBRARY'}
+                                {favorited ? 'QUITAR DE FAVORITOS' : 'AÑADIR A FAVORITOS'}
                             </button>
                             {game.website && (
                                 <a href={game.website} target="_blank" rel="noreferrer" style={{ textDecoration: 'underline', color: 'var(--text-primary)' }}>
-                                    Official Website
+                                    Sitio Oficial
                                 </a>
                             )}
                         </div>
@@ -83,7 +83,7 @@ function GameDetails() {
 
             <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '4rem 2rem', display: 'grid', gridTemplateColumns: '1fr 300px', gap: '4rem' }}>
                 <div>
-                    <h3 style={{ borderBottom: '1px solid var(--text-tertiary)', paddingBottom: '1rem', marginBottom: '2rem' }}>About</h3>
+                    <h3 style={{ borderBottom: '1px solid var(--text-tertiary)', paddingBottom: '1rem', marginBottom: '2rem' }}>Sobre el juego</h3>
                     <div
                         dangerouslySetInnerHTML={{ __html: game.description }}
                         style={{ lineHeight: '1.8', color: 'var(--text-secondary)', fontSize: '1.1rem' }}
@@ -92,21 +92,21 @@ function GameDetails() {
 
                 <div style={{ borderLeft: '1px solid var(--text-tertiary)', paddingLeft: '2rem' }}>
                     <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Released</h4>
+                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Lanzamiento</h4>
                         <p style={{ color: 'var(--text-primary)', margin: 0 }}>{game.released}</p>
                     </div>
 
                     <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Genres</h4>
+                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Géneros</h4>
                         <p style={{ color: 'var(--text-primary)', margin: 0 }}>{game.genres?.map(g => g.name).join(', ')}</p>
                     </div>
 
                     <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Platforms</h4>
+                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Plataformas</h4>
                         <p style={{ color: 'var(--text-primary)', margin: 0 }}>{game.platforms?.map(p => p.platform.name).join(', ')}</p>
                     </div>
                     <div style={{ marginBottom: '2rem' }}>
-                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Publisher</h4>
+                        <h4 style={{ color: 'var(--text-tertiary)', fontSize: '0.9rem', textTransform: 'uppercase' }}>Editor</h4>
                         <p style={{ color: 'var(--text-primary)', margin: 0 }}>{game.publishers?.map(p => p.name).join(', ')}</p>
                     </div>
                 </div>

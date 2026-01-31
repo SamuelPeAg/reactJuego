@@ -6,7 +6,7 @@ function Favorites() {
 
     return (
         <div className="container" style={{ padding: '4rem 2rem' }}>
-            <h1 style={{ marginBottom: '3rem' }}>Mis Colección</h1>
+            <h1 style={{ marginBottom: '3rem' }}>Mis Favoritos</h1>
 
             {favorites.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '4rem', border: '1px dashed var(--text-tertiary)', borderRadius: '8px' }}>

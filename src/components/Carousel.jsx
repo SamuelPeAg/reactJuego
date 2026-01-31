@@ -29,7 +29,7 @@ function Carousel() {
         setCurrentIndex((prev) => (prev === 0 ? games.length - 1 : prev - 1));
     };
 
-    if (loading) return <div style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Loading...</div>;
+    if (loading) return <div style={{ height: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>Cargando...</div>;
     if (games.length === 0) return null;
 
     const currentGame = games[currentIndex];
@@ -52,18 +52,18 @@ function Carousel() {
                 <div className="animate-enter" style={{ maxWidth: '800px' }}>
                     <h2 style={{ fontSize: '4rem', margin: '0 0 1rem', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>{currentGame.name}</h2>
                     <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem', alignItems: 'center' }}>
-                        <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>{currentGame.rating.toFixed(1)} Rating</span>
+                        <span style={{ fontSize: '1.1rem', fontWeight: 600 }}>{currentGame.rating.toFixed(1)} Valoración</span>
                         <span style={{ fontSize: '1.1rem', color: 'var(--text-secondary)' }}>{currentGame.released}</span>
                     </div>
                     <Link to={`/game/${currentGame.id}`}>
-                        <button>DETAILS</button>
+                        <button>DETALLES</button>
                     </Link>
                 </div>
             </div>
 
             <div style={{ position: 'absolute', bottom: '2rem', right: '2rem', display: 'flex', gap: '1rem' }}>
-                <button className="secondary" onClick={prevSlide} style={{ padding: '0.5rem 1rem' }}>PREV</button>
-                <button className="secondary" onClick={nextSlide} style={{ padding: '0.5rem 1rem' }}>NEXT</button>
+                <button className="secondary" onClick={prevSlide} style={{ padding: '0.5rem 1rem' }}>ANT</button>
+                <button className="secondary" onClick={nextSlide} style={{ padding: '0.5rem 1rem' }}>SIG</button>
             </div>
         </div>
     );

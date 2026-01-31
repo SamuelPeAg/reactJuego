@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 
 export function useFavorites() {
     const [favorites, setFavorites] = useState(() => {
-        // Load from local storage on initial render
+        // Cargar desde localStorage al inicio
         const saved = localStorage.getItem('game_favorites');
         return saved ? JSON.parse(saved) : [];
     });
 
     useEffect(() => {
-        // Save to local storage whenever favorites change
+        // Guardar en localStorage cuando cambian los favoritos
         localStorage.setItem('game_favorites', JSON.stringify(favorites));
     }, [favorites]);
 
