@@ -18,6 +18,9 @@ function Header() {
                 <Link to="/games" className={`nav-link ${isActive('/games') ? 'active' : ''}`}>
                     Explorar
                 </Link>
+                <Link to="/publishers" className={`nav-link ${isActive('/publishers') ? 'active' : ''}`}>
+                    Publishers
+                </Link>
                 <Link to="/favorites" className={`nav-link ${isActive('/favorites') ? 'active' : ''}`}>
                     Favoritos
                 </Link>

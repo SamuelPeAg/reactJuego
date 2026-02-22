@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Games from './pages/Games';
 import GameDetails from './pages/GameDetails';
 import Favorites from './pages/Favorites';
+import PublisherSearch from './pages/PublisherSearch';
+import PublisherDetails from './pages/PublisherDetails';
 import './App.css';
 
 function App() {
@@ -15,8 +17,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/games" element={<Games />} />
+          <Route path="/games/:type/:id" element={<Games />} />
           <Route path="/game/:id" element={<GameDetails />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/publishers" element={<PublisherSearch />} />
+          <Route path="/publisher/:id" element={<PublisherDetails />} />
         </Routes>
       </main>
       <Footer />

@@ -93,7 +93,7 @@ function Carousel() {
 
             <div className="container" style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center', padding: '0 8rem', zIndex: 10 }}>
                 <div style={{ maxWidth: '900px' }}>
-                    <div className="flex items-center gap-4" style={{ marginBottom: '2.5rem' }}>
+                    <div className="flex items-center gap-8" style={{ marginBottom: '2.5rem' }}>
                         <span style={{
                             padding: '0.5rem 1.2rem',
                             borderRadius: '6px',
@@ -110,23 +110,23 @@ function Carousel() {
                         {currentGame.name}
                     </h1>
 
-                    <div className="flex items-center gap-10" style={{ marginBottom: '4rem' }}>
-                        <div className="flex flex-col">
-                            <span style={{ fontSize: '0.8rem', color: 'var(--accent-secondary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.1em' }}>Calificación</span>
-                            <span style={{ fontSize: '2rem', fontWeight: '800' }}>{currentGame.rating.toFixed(1)} <span style={{ fontSize: '1rem', opacity: 0.5 }}>/ 5.0</span></span>
+                    <div className="flex items-center gap-16" style={{ marginBottom: '4rem' }}>
+                        <div className="flex flex-col gap-2">
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.1em' }}>Calificación</span>
+                            <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--accent-primary)' }}>{currentGame.rating.toFixed(1)} <span style={{ fontSize: '1.2rem', opacity: 0.5 }}>/ 5.0</span></span>
                         </div>
-                        <div style={{ width: '1px', height: '50px', background: 'rgba(255,255,255,0.15)' }} />
-                        <div className="flex flex-col">
-                            <span style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.1em' }}>Estreno</span>
-                            <span style={{ fontSize: '2rem', fontWeight: '800' }}>{currentGame.released?.split('-')[0]}</span>
+                        <div style={{ width: '1px', height: '60px', background: 'rgba(255,255,255,0.1)' }} />
+                        <div className="flex flex-col gap-2">
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.1em' }}>Estreno</span>
+                            <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--accent-secondary)' }}>{currentGame.released?.split('-')[0]}</span>
                         </div>
                     </div>
 
-                    <div className="flex gap-6">
+                    <div className="flex gap-10">
                         <button className="btn-nova primary" style={{ scale: '1.1' }}>
                             VER DETALLES
                         </button>
-                        <div className="flex gap-3">
+                        <div className="flex gap-4">
                             <button onClick={prevSlide} className="btn-nova" style={{ padding: '1rem' }}>
                                 ←
                             </button>

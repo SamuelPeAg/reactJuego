@@ -28,18 +28,18 @@ function GameCard({ game }) {
                 </div>
 
                 <div className="p-6">
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'white' }}>
+                    <h3 style={{ fontSize: '1.2rem', marginBottom: '1.2rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', color: 'white', fontWeight: '800' }}>
                         {game.name}
                     </h3>
 
                     <div className="flex justify-between items-center">
-                        <span style={{ color: 'var(--accent-secondary)', fontSize: '0.75rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                        <span style={{ color: 'var(--accent-secondary)', fontSize: '0.85rem', fontWeight: '900', letterSpacing: '0.05em' }}>
                             {game.released?.split('-')[0] || 'TBA'}
                         </span>
 
                         <div className="flex gap-2">
                             {(game.parent_platforms || game.platforms)?.slice(0, 3).map(p => (
-                                <span key={p.platform.id} style={{ fontSize: '0.65rem', opacity: 0.5, textTransform: 'uppercase', fontWeight: '600' }}>
+                                <span key={p.platform.id} style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', opacity: 0.8 }}>
                                     {p.platform.name.slice(0, 3)}
                                 </span>
                             ))}

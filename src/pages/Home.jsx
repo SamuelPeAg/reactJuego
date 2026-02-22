@@ -38,7 +38,7 @@ function Home() {
                 <span style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', fontWeight: '800', letterSpacing: '0.2em' }}>NAVEGACIÓN</span>
                 <h2 style={{ fontSize: '2.5rem', marginTop: '1rem', marginBottom: '3rem' }}>EXPLORA POR GÉNERO</h2>
 
-                <div className="flex gap-4 flex-wrap">
+                <div className="flex gap-8 flex-wrap">
                     {genres.map(genre => (
                         <div
                             key={genre.slug}
@@ -51,7 +51,10 @@ function Home() {
                                 transition: 'all 0.4s cubic-bezier(0.23, 1, 0.32, 1)',
                                 flex: '1 1 300px',
                                 textAlign: 'center',
-                                scale: '1'
+                                scale: '1',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '1rem'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.transform = 'translateY(-10px)';
