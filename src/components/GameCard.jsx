@@ -32,15 +32,39 @@ function GameCard({ game }) {
                         {game.name}
                     </h3>
 
-                    <div className="flex justify-between items-center">
-                        <span style={{ color: 'var(--accent-secondary)', fontSize: '0.85rem', fontWeight: '900', letterSpacing: '0.05em' }}>
-                            {game.released?.split('-')[0] || 'TBA'}
-                        </span>
+                    <div className="flex justify-between items-center" style={{ marginTop: '0.5rem' }}>
+                        <div style={{
+                            background: 'rgba(255, 255, 255, 0.05)',
+                            padding: '0.4rem 0.8rem',
+                            borderRadius: '8px',
+                            border: '1px solid var(--border-glass)',
+                            display: 'flex',
+                            alignItems: 'center'
+                        }}>
+                            <span style={{ color: 'white', fontSize: '0.8rem', fontWeight: '800', letterSpacing: '0.05em' }}>
+                                {game.released?.split('-')[0] || 'TBA'}
+                            </span>
+                        </div>
 
                         <div className="flex gap-2">
-                            {(game.parent_platforms || game.platforms)?.slice(0, 3).map(p => (
-                                <span key={p.platform.id} style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '700', opacity: 0.8 }}>
-                                    {p.platform.name.slice(0, 3)}
+                            {(game.parent_platforms || game.platforms)?.slice(0, 4).map(p => (
+                                <span
+                                    key={p.platform.id}
+                                    style={{
+                                        fontSize: '0.65rem',
+                                        color: 'var(--accent-secondary)',
+                                        fontWeight: '900',
+                                        background: 'rgba(6, 182, 212, 0.1)',
+                                        padding: '0.3rem 0.5rem',
+                                        borderRadius: '6px',
+                                        textTransform: 'uppercase'
+                                    }}
+                                >
+                                    {p.platform.slug.includes('playstation') ? 'PS' :
+                                        p.platform.slug.includes('xbox') ? 'XB' :
+                                            p.platform.slug.includes('pc') ? 'PC' :
+                                                p.platform.slug.includes('nintendo') ? 'NS' :
+                                                    p.platform.name.slice(0, 2)}
                                 </span>
                             ))}
                         </div>
