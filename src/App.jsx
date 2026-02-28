@@ -7,6 +7,8 @@ import GameDetails from './pages/GameDetails';
 import Favorites from './pages/Favorites';
 import PublisherSearch from './pages/PublisherSearch';
 import PublisherDetails from './pages/PublisherDetails';
+import Events from './pages/Events';
+import MyEvents from './pages/MyEvents';
 import './App.css';
 
 function App() {
@@ -20,12 +22,15 @@ function App() {
           <Route path="/games/:type/:id" element={<Games />} />
           <Route path="/game/:id" element={<GameDetails />} />
           <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favoritos" element={<Favorites />} />
           <Route path="/publishers" element={<PublisherSearch />} />
           <Route path="/publisher/:id" element={<PublisherDetails />} />
+          <Route path="/eventos" element={<Events />} />
+          <Route path="/mis-eventos" element={<MyEvents />} />
         </Routes>
       </main>
       <Footer />
-    </Router>
+    </Router >
   );
 }
 

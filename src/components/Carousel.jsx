@@ -1,27 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
-import { getPopularGames } from '../services/rawg';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPopularGamesThunk } from '../features/games/gamesThunks';
 import { useNavigate } from 'react-router-dom';
 
 function Carousel() {
-    const [games, setGames] = useState([]);
+    const dispatch = useDispatch();
+    const { popularGames: games, loading } = useSelector((state) => state.games);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    const fetchGames = useCallback(async () => {
-        try {
-            const data = await getPopularGames();
-            setGames(data.results.slice(0, 5));
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    }, []);
-
     useEffect(() => {
-        fetchGames();
-    }, [fetchGames]);
+        dispatch(fetchPopularGamesThunk());
+    }, [dispatch]);
 
     useEffect(() => {
         if (games.length === 0) return;

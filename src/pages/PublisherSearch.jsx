@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { getPublishers } from '../services/rawg';
+import { getPublishers } from '../services/gamesService';
 import SearchBar from '../components/SearchBar';
 import Pagination from '../components/Pagination';
 

@@ -1,9 +1,9 @@
-import { useFavorites } from '../hooks/useFavorites';
+import { useSelector } from 'react-redux';
 import GameCard from '../components/GameCard';
 import { Link } from 'react-router-dom';
 
 function Favorites() {
-    const { favorites } = useFavorites();
+    const { favorites } = useSelector((state) => state.games);
 
     return (
         <div className="page-container">

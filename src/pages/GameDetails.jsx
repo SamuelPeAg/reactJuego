@@ -1,28 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getGameDetails } from '../services/rawg';
-import { useFavorites } from '../hooks/useFavorites';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGameDetailsThunk } from '../features/games/gamesThunks';
+import { toggleFavorite } from '../features/games/gamesSlice';
 
 function GameDetails() {
     const { id } = useParams();
-    const [game, setGame] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const { isFavorite, addFavorite, removeFavorite } = useFavorites();
+    const dispatch = useDispatch();
+    const { gameDetails: game, loading, favorites } = useSelector((state) => state.games);
 
     useEffect(() => {
-        const fetchDetails = async () => {
-            try {
-                const data = await getGameDetails(id);
-                setGame(data);
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDetails();
+        dispatch(fetchGameDetailsThunk(id));
         window.scrollTo(0, 0);
-    }, [id]);
+    }, [dispatch, id]);
 
     if (loading) return (
         <div className="page-container text-center">
@@ -37,14 +27,10 @@ function GameDetails() {
         </div>
     );
 
-    const favorited = isFavorite(game.id);
+    const favorited = favorites.some((fav) => fav.id === game.id);
 
-    const toggleFavorite = () => {
-        if (favorited) {
-            removeFavorite(game.id);
-        } else {
-            addFavorite(game);
-        }
+    const handleToggleFavorite = () => {
+        dispatch(toggleFavorite(game));
     };
 
     return (
@@ -93,7 +79,7 @@ function GameDetails() {
                             </div>
 
                             <button
-                                onClick={toggleFavorite}
+                                onClick={handleToggleFavorite}
                                 className={`btn-nova ${favorited ? '' : 'primary'}`}
                                 style={{ minWidth: '280px', height: '60px' }}
                             >

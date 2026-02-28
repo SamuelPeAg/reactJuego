@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, useParams } from 'react-router-dom';
-import { getGames } from '../services/rawg';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchGamesThunk } from '../features/games/gamesThunks';
 import GameCard from '../components/GameCard';
 import SearchBar from '../components/SearchBar';
 import Pagination from '../components/Pagination';
@@ -11,34 +12,20 @@ function Games() {
     const page = parseInt(searchParams.get('page')) || 1;
     const genreParam = searchParams.get('genre') || '';
 
-    const [games, setGames] = useState([]);
+    const dispatch = useDispatch();
+    const { games, loading, totalPages } = useSelector((state) => state.games);
     const [search, setSearch] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-
-    const fetchGamesData = async () => {
-        setLoading(true);
-        try {
-            let genres = genreParam;
-            let tags = '';
-
-            if (type === 'genre') genres = id;
-            if (type === 'tag') tags = id;
-
-            const data = await getGames(search, page, genres, tags);
-            setGames(data.results);
-            setTotalPages(Math.ceil(data.count / 20));
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
-        fetchGamesData();
+        let genres = genreParam;
+        let tags = '';
+
+        if (type === 'genre') genres = id;
+        if (type === 'tag') tags = id;
+
+        dispatch(fetchGamesThunk({ search, page, genres, tags, publishers: '' }));
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search, page, type, id, genreParam]);
+    }, [dispatch, search, page, type, id, genreParam]);
 
     const getTitle = () => {
         if (type === 'genre') return `GÉNERO: ${id.replace('-', ' ').toUpperCase()}`;
